@@ -9,6 +9,7 @@
     $jam_keluar    = time('hh:mm');
     $tgl           = date('dd-mm-yyyy');
     $status        = $_POST['status']; 
+    $addedby       = $_POST['addedby'];
     //$imagePath     = 'images/'.$image;
     $image = $_FILES['image']['name'];
     $imagePath     = 'images/'.$image;
@@ -19,7 +20,7 @@
     // move_uploaded_file($_FILES['userfile']['tmp_name'], $imagePath);
 
     
-    $result = mysqli_query($con, "INSERT INTO parkir SET id_kendaraan='$id_kendaraan', plat_nomor='$plat_nomor', jam_masuk=NOW(), jam_keluar=NULL, tgl=NOW(), status='$status', image='$image'");
+    $result = mysqli_query($con, "INSERT INTO parkir SET id_kendaraan='$id_kendaraan', plat_nomor='$plat_nomor', jam_masuk=NOW(), jam_keluar=NULL, tgl=NOW(), status='$status', addedby='$addedby', image='$image'");
     
     $id = mysqli_insert_id($con);
     $quer = mysqli_query($con, "SELECT parkir.id_parkir, kendaraan.jenis_kendaraan, parkir.plat_nomor, parkir.jam_masuk, parkir.jam_keluar, parkir.tgl, parkir.image, parkir.status, parkir.addedby, kendaraan.biaya FROM parkir INNER JOIN kendaraan ON parkir.id_kendaraan=kendaraan.id_kendaraan WHERE parkir.status = 'Parkir' AND id_parkir='$id'");
